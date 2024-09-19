@@ -6,6 +6,7 @@ export default {
     console.log("========coming here to post data=====");
     console.log(req.body);
     const job = new Jobs(req.body);
+
     await job.save();
     res.status(201).send(job);
   },

@@ -59,12 +59,13 @@ const jobsSchema = new Schema({
       return this.type === "JV";
     },
   },
-  image: {
+  images: {
     type: String,
     required: function () {
       return this.type === "JVA";
     },
   },
+
   location: {
     latitude: {
       type: Number,
@@ -132,7 +133,7 @@ export const validateJob = (job) => {
     deadline: Joi.date().when("type", { is: "JV", then: Joi.required() }),
     address: Joi.string().when("type", { is: "JV", then: Joi.required() }),
     salary: Joi.number().when("type", { is: "JV", then: Joi.required() }),
-    image: Joi.string().when("type", { is: "JVA", then: Joi.required() }),
+    images: Joi.string().when("type", { is: "JVA", then: Joi.required() }),
     location: Joi.object({
       latitude: Joi.number().required(),
       longitude: Joi.number().required(),
