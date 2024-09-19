@@ -139,10 +139,7 @@ export const validateJob = (job) => {
       longitude: Joi.number().required(),
     }).required(),
     applicants: Joi.array().items(Joi.objectId()),
-    specificLocation: Joi.string().when("type", {
-      is: "JV",
-      then: Joi.required(),
-    }),
+
     region: Joi.string().when("type", { is: "JVA", then: Joi.required() }),
     owner: Joi.objectId().required(),
     createdAt: Joi.date().default(Date.now),
