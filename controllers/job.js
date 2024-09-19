@@ -3,6 +3,7 @@ import Jobs from "../models/Jobs.js";
 
 export default {
   createJob: async (req, res) => {
+    console.log("========coming here to post data=====");
     console.log(req.body);
     const job = new Jobs(req.body);
     await job.save();
