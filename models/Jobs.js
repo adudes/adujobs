@@ -80,12 +80,7 @@ const jobsSchema = new Schema({
     type: [Schema.Types.ObjectId],
     ref: "User",
   },
-  specificLocation: {
-    type: String,
-    required: function () {
-      return this.type === "JV";
-    },
-  },
+
   region: {
     type: String,
     required: function () {
