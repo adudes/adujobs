@@ -41,12 +41,12 @@ const jobsSchema = new Schema({
       return this.type === "JV";
     },
   },
-  deadline: {
-    type: Date,
-    required: function () {
-      return this.type === "JV";
-    },
-  },
+  // deadline: {
+  //   type: Date,
+  //   required: function () {
+  //     return this.type === "JV";
+  //   },
+  // },
   address: {
     type: String,
     required: function () {
@@ -130,7 +130,7 @@ export const validateJob = (job) => {
       is: "JV",
       then: Joi.required(),
     }),
-    deadline: Joi.date().when("type", { is: "JV", then: Joi.required() }),
+    // deadline: Joi.date().when("type", { is: "JV", then: Joi.required() }),
     address: Joi.string().when("type", { is: "JV", then: Joi.required() }),
     salary: Joi.number().when("type", { is: "JV", then: Joi.required() }),
     images: Joi.string().when("type", { is: "JVA", then: Joi.required() }),
