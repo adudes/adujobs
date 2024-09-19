@@ -60,7 +60,7 @@ const jobsSchema = new Schema({
     },
   },
   images: {
-    type: String,
+    type: [String],
     required: function () {
       return this.type === "JVA";
     },
