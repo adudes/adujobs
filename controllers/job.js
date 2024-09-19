@@ -3,13 +3,13 @@ import Jobs from "../models/Jobs.js";
 
 export default {
   createJob: async (req, res) => {
+    console.log(req.body);
     const job = new Jobs(req.body);
     await job.save();
     res.status(201).send(job);
   },
 
   getJobs: async (req, res) => {
-    console.log("=======coming here for fetching jobs=======");
     const { page = 1, limit = 10 } = req.query;
     const jobs = await Jobs.find()
       .populate("owner")
