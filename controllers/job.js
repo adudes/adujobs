@@ -5,7 +5,7 @@ export default {
   createJob: async (req, res) => {
     console.log("========coming here to post data=====");
     console.log(req.body);
-    const ob = { ...req.body, deadline: Date.now };
+    const ob = { ...req.body, owner: req.params?.userid, deadline: Date.now };
     const job = new Jobs(ob);
 
     await job.save();
