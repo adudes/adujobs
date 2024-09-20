@@ -25,8 +25,9 @@ export default {
   },
   getUser: async (req, res) => {
     const { userId } = req.params;
-    const user = await User.find();
-    //const user = await User.findById(userId);
+    console.log(userId);
+    const user = await User.findById(userId);
+    console.log(user);
     if (!user) return res.status(404).send(null);
 
     res.send(user);
