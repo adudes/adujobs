@@ -26,7 +26,15 @@ const userSchema = new Schema({
 
   profilePicture: { type: String },
   accessToken: { type: String },
+  gift: {
+    type: Number,
+    min: 0,
+  },
+  rate: {
+    type: Number,
 
+    min: 0,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

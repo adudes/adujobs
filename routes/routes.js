@@ -9,7 +9,8 @@ const router = express.Router();
 // ====user====
 router.post("/users/", asyncmiddleware(users.createUser));
 router.get("/users/:userid", asyncmiddleware(users.getUser));
-
+router.put("/users/:userid", asyncmiddleware(users.updateUser));
+router.delete("/users/:userid", asyncmiddleware(users.deleteUser));
 //====jobs======
 router.get("/jobs", asyncmiddleware(job.getJobs));
 router.get("/jobs/:jobid", asyncmiddleware(job.getJob));
