@@ -63,7 +63,7 @@ export default {
     console.log("Coin added or updated successfully:", user);
     res.send(user);
   },
-  rateUser: async (req, res) => {
+  addRateUser: async (req, res) => {
     const { userid } = req.params;
     const user = await Users.findById(userid);
     if (!user) {

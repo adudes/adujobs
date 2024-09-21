@@ -8,6 +8,8 @@ const router = express.Router();
 
 // ====user====
 router.post("/users/", asyncmiddleware(users.createUser));
+router.post("/users/coin/userid", asyncmiddleware(users.addCoinToUser));
+router.post("/users/rate/userid", asyncmiddleware(users.addRateUser));
 router.get("/users/:userid", asyncmiddleware(users.getUser));
 router.put("/users/:userid", asyncmiddleware(users.updateUser));
 router.delete("/users/:userid", asyncmiddleware(users.deleteUser));
