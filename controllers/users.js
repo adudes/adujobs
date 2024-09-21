@@ -16,6 +16,7 @@ export default {
   },
   getUser: async (req, res) => {
     const { userid } = req.params;
+    console.log(userid);
     const user = await Users.findById(userid)
       .populate("coin.userId")
       .populate("rate.userId")
@@ -43,8 +44,8 @@ export default {
   },
 
   addCoinToUser: async (req, res) => {
-    const { userid } = req.params;
-    const user = await Users.findById(userid);
+    console.log(req.params.userid);
+    const user = await Users.findById(req.params.userid);
     if (!user) {
       throw new Error("User not found");
     }
@@ -64,8 +65,9 @@ export default {
     res.send(user);
   },
   addRateUser: async (req, res) => {
-    const { userid } = req.params;
-    const user = await Users.findById(userid);
+    console.log(req.params.userid);
+    const user = await Users.findById(req.params.userid);
+
     if (!user) {
       throw new Error("User not found");
     }
