@@ -26,15 +26,35 @@ const userSchema = new Schema({
 
   profilePicture: { type: String },
   accessToken: { type: String },
-  gift: {
-    type: Number,
-    min: 0,
-  },
-  rate: {
-    type: Number,
+  coin: [
+    {
+      userId: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+      },
+      numberOfCoins: {
+        type: Number,
+        required: true,
+        min: 0,
+      },
+    },
+  ],
+  rate: [
+    {
+      userId: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+      },
+      numberOfRates: {
+        type: Number,
+        required: true,
+        min: 0,
+      },
+    },
+  ],
 
-    min: 0,
-  },
   createdAt: {
     type: Date,
     default: Date.now,
