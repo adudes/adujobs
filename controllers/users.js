@@ -44,7 +44,6 @@ export default {
   },
 
   addCoinToUser: async (req, res) => {
-    console.log(req.params.userid);
     const user = await Users.findById(req.params.userid);
     if (!user) {
       throw new Error("User not found");
@@ -55,11 +54,11 @@ export default {
     );
     if (existingCoin) {
       existingCoin.numberOfCoins =
-        existingCoin.numberOfCoins + coinData.numberOfCoins;
+        existingCoin.numberOfCoins + req.body.numberOfCoins;
     } else {
       user.coin.push(req.body);
     }
-
+    user.totalCoins = user.totalCoins + req.body.numberOfCoins;
     await user.save();
     console.log("Coin added or updated successfully:", user);
     res.send(user);

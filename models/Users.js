@@ -26,6 +26,7 @@ const userSchema = new Schema({
 
   profilePicture: { type: String },
   accessToken: { type: String },
+
   coin: [
     {
       userId: {
@@ -40,6 +41,10 @@ const userSchema = new Schema({
       },
     },
   ],
+  totalCoins: {
+    type: Number,
+    default: 0,
+  },
   rate: [
     {
       userId: {
@@ -54,6 +59,11 @@ const userSchema = new Schema({
       },
     },
   ],
+
+  averageRate: {
+    type: Number,
+    default: 0,
+  },
 
   createdAt: {
     type: Date,
