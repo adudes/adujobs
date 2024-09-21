@@ -57,7 +57,7 @@ export default {
       existingCoin.numberOfCoins =
         existingCoin.numberOfCoins + coinData.numberOfCoins;
     } else {
-      user.coin.push(coinData);
+      user.coin.push(req.body);
     }
 
     await user.save();
