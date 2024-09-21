@@ -54,7 +54,7 @@ export default {
     );
     if (existingCoin) {
       existingCoin.numberOfCoins =
-        existingCoin.numberOfCoins + req.body.numberOfCoins;
+        parseInt(existingCoin.numberOfCoins) + parseInt(req.body.numberOfCoins);
     } else {
       user.coin.push(req.body);
     }
@@ -75,7 +75,7 @@ export default {
       (rate) => rate.userId.toString() === req.body.userId
     );
     if (existingRate) {
-      existingRate.numberOfRates = req.body?.numberOfRates;
+      existingRate.numberOfRates = parseInt(req.body?.numberOfRates);
     } else {
       user.rate.push(req.body);
     }
