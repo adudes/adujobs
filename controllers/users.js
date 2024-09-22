@@ -75,10 +75,15 @@ export default {
     );
     if (existingRate) {
       existingRate.numberOfRates = parseInt(req.body?.numberOfRates);
+      user.totalRate =
+        user.totalRate -
+        parseInt(existingRate.numberOfRates) +
+        parseInt(req.body?.numberOfRates);
     } else {
       user.rate.push(req.body);
+      user.totalRate += parseInt(req.body?.numberOfRates);
     }
-    user.totalRate += parseInt(req.body?.numberOfRates);
+
     await user.save();
 
     console.log("=======Rated successfully======");
