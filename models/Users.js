@@ -60,7 +60,7 @@ const userSchema = new Schema({
     },
   ],
 
-  averageRate: {
+  totalRate: {
     type: Number,
     default: 0,
   },

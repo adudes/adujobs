@@ -64,7 +64,6 @@ export default {
     res.send(user);
   },
   addRateUser: async (req, res) => {
-    console.log(req.params.userid);
     const user = await Users.findById(req.params.userid);
 
     if (!user) {
@@ -79,9 +78,13 @@ export default {
     } else {
       user.rate.push(req.body);
     }
-
+    user.totalRate += req.body?.numberOfRates;
     await user.save();
-    console.log("Coin added or updated successfully:", user);
-    res.send(user);
+
+    console.log("=======Rated successfully======");
+    res.send({
+      numberOfRates: user.rate.length,
+      averageRate: user.totalRate / user.rate.length,
+    });
   },
 };
