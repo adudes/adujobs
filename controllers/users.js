@@ -78,7 +78,7 @@ export default {
     } else {
       user.rate.push(req.body);
     }
-    user.totalRate += req.body?.numberOfRates;
+    user.totalRate += parseInt(req.body?.numberOfRates);
     await user.save();
 
     console.log("=======Rated successfully======");
