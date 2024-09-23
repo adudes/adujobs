@@ -70,4 +70,41 @@ export default {
     }
     res.status(200).send(job);
   },
+  getJobByCategory: async (req, res) => {
+    const { category } = req.params;
+    const { page = 1, limit = 10 } = req.query;
+
+    const storeProducts = await Jobs.find({ categories: category })
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
+      .exec();
+    const count = await Jobs.countDocuments({ categories: category });
+    res.json({
+      storeProducts,
+      totalPages: Math.ceil(count / limit),
+      count: count,
+      currentPage: page,
+    });
+  },
+
+  getJobBySubCategory: async (req, res) => {
+    const { subCategory } = req.params;
+    const { page = 1, limit = 10 } = req.query;
+
+    const storeProducts = await Jobs.find({
+      subCategories: subCategory,
+    })
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
+      .exec();
+    const count = await Jobs.countDocuments({
+      subCategories: subCategory,
+    });
+    res.json({
+      storeProducts,
+      totalPages: Math.ceil(count / limit),
+      count: count,
+      currentPage: page,
+    });
+  },
 };
