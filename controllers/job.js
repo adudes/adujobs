@@ -92,13 +92,13 @@ export default {
     const { page = 1, limit = 10 } = req.query;
 
     const jobs = await Jobs.find({
-      subCategories: subCategory,
+      jobTitle: subCategory,
     })
       .limit(limit * 1)
       .skip((page - 1) * limit)
       .exec();
     const count = await Jobs.countDocuments({
-      subCategories: subCategory,
+      jobTitle: subCategory,
     });
     res.json({
       jobs,
