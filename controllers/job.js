@@ -94,12 +94,13 @@ export default {
     const jobs = await Jobs.find({
       jobTitle: subCategory,
     })
-      .limit(limit * 1)
-      .skip((page - 1) * limit)
+      .limit(parseInt(limit))
+      .skip((parseInt(page) - 1) * parseInt(limit))
       .exec();
     const count = await Jobs.countDocuments({
       jobTitle: subCategory,
     });
+    console.log(jobs);
     res.json({
       jobs,
       totalPages: Math.ceil(count / limit),
