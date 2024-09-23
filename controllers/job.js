@@ -74,13 +74,13 @@ export default {
     const { category } = req.params;
     const { page = 1, limit = 10 } = req.query;
 
-    const storeProducts = await Jobs.find({ categories: category })
+    const jobs = await Jobs.find({ categories: category })
       .limit(limit * 1)
       .skip((page - 1) * limit)
       .exec();
     const count = await Jobs.countDocuments({ categories: category });
     res.json({
-      storeProducts,
+      jobs,
       totalPages: Math.ceil(count / limit),
       count: count,
       currentPage: page,
@@ -91,7 +91,7 @@ export default {
     const { subCategory } = req.params;
     const { page = 1, limit = 10 } = req.query;
 
-    const storeProducts = await Jobs.find({
+    const jobs = await Jobs.find({
       subCategories: subCategory,
     })
       .limit(limit * 1)
@@ -101,7 +101,7 @@ export default {
       subCategories: subCategory,
     });
     res.json({
-      storeProducts,
+      jobs,
       totalPages: Math.ceil(count / limit),
       count: count,
       currentPage: page,
