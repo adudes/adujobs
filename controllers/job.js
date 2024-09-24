@@ -86,9 +86,8 @@ export default {
       currentPage: page,
     });
   },
-  console.log(x);
+
   getJobBySubCategory: async (req, res) => {
-    
     const { subCategory } = req.params;
     const { page = 1, limit = 10 } = req.query;
     console.log(req.query);
