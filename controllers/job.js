@@ -19,7 +19,8 @@ export default {
       .skip((page - 1) * limit)
       .exec();
     const count = await Jobs.countDocuments();
-    res.status(404).send({
+    xx;
+    res.status(505).send({
       jobs,
       totalPages: Math.ceil(count / limit),
       currentPage: page,
