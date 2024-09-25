@@ -106,15 +106,18 @@ export default {
   getJobBySubCategory: async (req, res) => {
     const { subCategory } = req.params;
     const { page = 1, limit = 10 } = req.query;
+    const filter = req.query?.filterBy;
 
     const jobs = await Jobs.find({
       jobTitle: subCategory,
+      ...filter,
     })
       .limit(parseInt(limit))
       .skip((parseInt(page) - 1) * parseInt(limit))
       .exec();
     const count = await Jobs.countDocuments({
       jobTitle: subCategory,
+      ...filter,
     });
 
     res.json({
