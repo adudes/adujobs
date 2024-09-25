@@ -125,4 +125,25 @@ export default {
       currentPage: parseInt(page),
     });
   },
+
+  getJobsByFilter: async (req, res) => {
+    const { page = 1, limit = 10 } = req.query;
+    const filter = req.query?.filterBy;
+
+    // delete filter.page;
+    // delete filter.limit;
+
+    const jobs = await Jobs.find(filter)
+      .limit(parseInt(limit))
+      .skip((parseInt(page) - 1) * parseInt(limit))
+      .exec();
+    const count = await Jobs.countDocuments(filter);
+
+    res.json({
+      jobs,
+      totalPages: Math.ceil(count / limit),
+      count: count,
+      currentPage: parseInt(page),
+    });
+  },
 };
