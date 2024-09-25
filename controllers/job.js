@@ -106,8 +106,7 @@ export default {
   getJobBySubCategory: async (req, res) => {
     const { subCategory } = req.params;
     const { page = 1, limit = 10 } = req.query;
-    console.log(req.query);
-    console.log(subCategory);
+
     const jobs = await Jobs.find({
       jobTitle: subCategory,
     })
