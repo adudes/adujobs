@@ -86,6 +86,22 @@ export default {
       currentPage: page,
     });
   },
+  getJobByType: async (req, res) => {
+    const { type } = req.params;
+    const { page = 1, limit = 10 } = req.query;
+
+    const jobs = await Jobs.find({ type: type })
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
+      .exec();
+    const count = await Jobs.countDocuments({ type: type });
+    res.json({
+      jobs,
+      totalPages: Math.ceil(count / limit),
+      count: count,
+      currentPage: page,
+    });
+  },
 
   getJobBySubCategory: async (req, res) => {
     const { subCategory } = req.params;
