@@ -22,7 +22,7 @@ export default {
     res.status(200).send({
       jobs,
       totalPages: Math.ceil(count / limit),
-      currentPage: page,
+      currentPage: parseInt(page),
     });
   },
 
@@ -83,7 +83,7 @@ export default {
       jobs,
       totalPages: Math.ceil(count / limit),
       count: count,
-      currentPage: page,
+      currentPage: parseInt(page),
     });
   },
   getJobByType: async (req, res) => {
@@ -99,7 +99,7 @@ export default {
       jobs,
       totalPages: Math.ceil(count / limit),
       count: count,
-      currentPage: page,
+      currentPage: parseInt(page),
     });
   },
 
@@ -122,7 +122,7 @@ export default {
       jobs,
       totalPages: Math.ceil(count / limit),
       count: count,
-      currentPage: page,
+      currentPage: parseInt(page),
     });
   },
 };
