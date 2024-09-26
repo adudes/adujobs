@@ -34,20 +34,6 @@ export default {
     res.status(200).send(job);
   },
 
-  getUserJobs: async (req, res) => {
-    const { page = 1, limit = 10 } = req.query;
-    const jobs = await Jobs.find({ owner: req.params.userid })
-      .limit(limit * 1)
-      .skip((page - 1) * limit)
-      .exec();
-    const count = await Jobs.countDocuments({ owner: req.params.userid });
-    res.status(200).send({
-      jobs,
-      totalPages: Math.ceil(count / limit),
-      currentPage: page,
-    });
-  },
-
   deleteUserJob: async (req, res) => {
     const job = await Jobs.findOneAndDelete({
       _id: req.params.jobid,
@@ -132,9 +118,6 @@ export default {
     const { page = 1, limit = 10 } = req.query;
     const filter = req.query?.filterBy;
 
-    // delete filter.page;
-    // delete filter.limit;
-
     const jobs = await Jobs.find(filter)
       .limit(parseInt(limit))
       .skip((parseInt(page) - 1) * parseInt(limit))
@@ -146,6 +129,25 @@ export default {
       totalPages: Math.ceil(count / limit),
       count: count,
       currentPage: parseInt(page),
+    });
+  },
+
+  getUserJobs: async (req, res) => {
+    const { page = 1, limit = 10 } = req.query;
+    const filter = req.query?.filterBy;
+
+    const jobs = await Jobs.find({ owner: req.params.userid, ...filter })
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
+      .exec();
+    const count = await Jobs.countDocuments({
+      owner: req.params.userid,
+      ...filter,
+    });
+    res.status(200).send({
+      jobs,
+      totalPages: Math.ceil(count / limit),
+      currentPage: page,
     });
   },
 };
