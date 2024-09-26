@@ -22,7 +22,7 @@ router.get(
 router.get("/jobs/:jobid", asyncmiddleware(job.getJob));
 router.get("/jobs/user/:userid", asyncmiddleware(job.getUserJobs));
 router.get(
-  "/jobs/user/:userid/subcategory",
+  "/jobs/:subCategory/:userid",
   asyncmiddleware(job.getUserJobBySubCategory)
 );
 
