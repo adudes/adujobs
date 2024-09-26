@@ -137,8 +137,8 @@ export default {
     const filter = req.query?.filterBy;
 
     const jobs = await Jobs.find({ owner: req.params.userid, ...filter })
-      .limit(limit * 1)
-      .skip((page - 1) * limit)
+      .limit(parseInt(limit) * 1)
+      .skip((parseInt(page) - 1) * parseInt(limit))
       .exec();
     const count = await Jobs.countDocuments({
       owner: req.params.userid,
@@ -147,7 +147,7 @@ export default {
     res.status(200).send({
       jobs,
       totalPages: Math.ceil(count / limit),
-      currentPage: page,
+      currentPage: parseInt(page),
     });
   },
 };
