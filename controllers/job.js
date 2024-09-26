@@ -150,4 +150,30 @@ export default {
       currentPage: parseInt(page),
     });
   },
+  getUserJobBySubCategory: async (req, res) => {
+    const { subCategory } = req.params;
+    const { page = 1, limit = 10 } = req.query;
+    const filter = req.query?.filterBy;
+
+    const jobs = await Jobs.find({
+      owner: req.params.userid,
+      jobTitle: subCategory,
+      ...filter,
+    })
+      .limit(parseInt(limit))
+      .skip((parseInt(page) - 1) * parseInt(limit))
+      .exec();
+    const count = await Jobs.countDocuments({
+      owner: req.params.userid,
+      jobTitle: subCategory,
+      ...filter,
+    });
+
+    res.json({
+      jobs,
+      totalPages: Math.ceil(count / limit),
+      count: count,
+      currentPage: parseInt(page),
+    });
+  },
 };

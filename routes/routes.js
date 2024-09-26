@@ -15,15 +15,21 @@ router.put("/users/:userid", asyncmiddleware(users.updateUser));
 router.delete("/users/:userid", asyncmiddleware(users.deleteUser));
 //====jobs======
 router.get("/jobs", asyncmiddleware(job.getJobsByFilter));
+router.get(
+  "/jobs/subcategory/:subCategory",
+  asyncmiddleware(job.getJobBySubCategory)
+);
 router.get("/jobs/:jobid", asyncmiddleware(job.getJob));
 router.get("/jobs/user/:userid", asyncmiddleware(job.getUserJobs));
+router.get(
+  "/jobs/user/:userid/subcategory",
+  asyncmiddleware(job.getUserJobBySubCategory)
+);
+
 router.delete("/jobs/user/:userid/:jobid", asyncmiddleware(job.deleteUserJob));
 router.put("/jobs/user/:userid/:jobid", asyncmiddleware(job.updateJobDetails));
 router.post("/jobs/:userid", asyncmiddleware(job.createJob));
 router.get("/jobs/category/:category", asyncmiddleware(job.getJobByCategory));
 router.get("/jobs/type/:type", asyncmiddleware(job.getJobByType));
-router.get(
-  "/jobs/subcategory/:subCategory",
-  asyncmiddleware(job.getJobBySubCategory)
-);
+
 export default router;
